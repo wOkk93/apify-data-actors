@@ -1,0 +1,152 @@
+#!/usr/bin/env node
+/**
+ * Quickstart runner for all 9 wyattearp Apify Data Actors.
+ *
+ * Usage:
+ *   npm install apify-client
+ *   export APIFY_TOKEN="your_apify_api_token"
+ *   node examples/node_quickstart.mjs --list
+ *   node examples/node_quickstart.mjs prediction-markets
+ */
+
+const ACTORS = {
+  "prediction-markets": [
+    "wyattearp/prediction-markets-unified",
+    {
+      platforms: ["polymarket", "kalshi"],
+      maxMarketsPerPlatform: 20,
+      includeCrossMarketMatches: true,
+    },
+  ],
+  "sec-edgar": [
+    "wyattearp/sec-edgar-filings-tracker",
+    {
+      mode: "company_filings",
+      tickersOrCiks: ["AAPL", "NVDA"],
+      forms: ["10-K", "10-Q", "8-K"],
+      maxFilings: 20,
+    },
+  ],
+  "ats-jobs": [
+    "wyattearp/ats-jobs-unified-scraper",
+    {
+      boards: ["greenhouse:stripe", "lever:palantir", "ashby:linear"],
+      maxJobsPerBoard: 20,
+      maxTotalJobs: 50,
+    },
+  ],
+  "remote-jobs": [
+    "wyattearp/remote-jobs-unified-scraper",
+    {
+      sources: ["remoteok", "remotive", "jobicy", "arbeitnow"],
+      remoteOnly: true,
+      maxJobsPerSource: 20,
+      maxTotalJobs: 50,
+    },
+  ],
+  "shopify-catalog": [
+    "wyattearp/shopify-catalog-lead-enricher",
+    {
+      domains: ["allbirds.com"],
+      mode: "products",
+      maxPagesPerStore: 1,
+      maxItems: 25,
+    },
+  ],
+  "appstore-reviews": [
+    "wyattearp/appstore-reviews-intel",
+    {
+      appIds: ["389801252"],
+      countries: ["us"],
+      sortBy: "mostrecent",
+      maxPagesPerCountry: 1,
+      maxReviews: 25,
+    },
+  ],
+  "googleplay-reviews": [
+    "wyattearp/googleplay-reviews-intel",
+    {
+      appIds: ["com.instagram.android"],
+      lang: "en",
+      country: "us",
+      sortBy: "newest",
+      maxReviews: 25,
+    },
+  ],
+  "shopify-appstore": [
+    "wyattearp/shopify-appstore-intel",
+    {
+      appSlugs: ["klaviyo-email-marketing"],
+      mode: "reviews",
+      sortBy: "newest",
+      maxPagesPerApp: 1,
+      maxItems: 25,
+    },
+  ],
+  substack: [
+    "wyattearp/substack-publications-scraper",
+    {
+      mode: "posts",
+      publications: [
+        "www.lennysnewsletter.com",
+        "newsletter.pragmaticengineer.com",
+      ],
+      maxPages: 1,
+      maxItems: 20,
+    },
+  ],
+};
+
+function printActors() {
+  console.log("Available actor keys:");
+  for (const [key, [actorId]] of Object.entries(ACTORS)) {
+    console.log(`  ${key.padEnd(20)} -> https://apify.com/${actorId}`);
+  }
+}
+
+async function main() {
+  const arg = process.argv[2] || "prediction-markets";
+  if (arg === "--list" || arg === "-l" || arg === "--help" || arg === "-h") {
+    printActors();
+    return;
+  }
+
+  const entry = ACTORS[arg];
+  if (!entry) {
+    console.error(`Unknown actor key: ${arg}`);
+    printActors();
+    process.exitCode = 1;
+    return;
+  }
+
+  const token = process.env.APIFY_TOKEN;
+  if (!token) {
+    console.error(
+      'Missing APIFY_TOKEN environment variable.\nRun: export APIFY_TOKEN="your_apify_api_token"'
+    );
+    process.exitCode = 1;
+    return;
+  }
+
+  let ApifyClient;
+  try {
+    ({ ApifyClient } = await import("apify-client"));
+  } catch {
+    console.error("Install dependency first: npm install apify-client");
+    process.exitCode = 1;
+    return;
+  }
+
+  const [actorId, runInput] = entry;
+  const client = new ApifyClient({ token });
+  console.log(`Running ${actorId} ...`);
+  const run = await client.actor(actorId).call(runInput);
+  const { items } = await client.dataset(run.defaultDatasetId).listItems();
+  console.log(`Fetched ${items.length} items. Sample (first 3):`);
+  console.log(JSON.stringify(items.slice(0, 3), null, 2));
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exitCode = 1;
+});
