@@ -29,6 +29,11 @@ Browse the full creator catalog: **[apify.com/api-market](https://apify.com/api-
 | **USASpending Federal Contracts & GovCon Leads API** | Business, Lead Generation | `$1.99 / 1,000 awards` (`$0.00199`) | [`api-market/usaspending-govcon-tracker`](https://apify.com/api-market/usaspending-govcon-tracker) |
 | **DeFiLlama Protocols, TVL, Yields, Fees & Stablecoins** | Business, AI | `$1.49 / 1,000 records` (`$0.00149`) | [`api-market/defillama-unified-intel`](https://apify.com/api-market/defillama-unified-intel) |
 | **Y Combinator Startups, Batches & Hiring Directory** | Business, Lead Generation | `$0.99 / 1,000 companies` (`$0.00099`) | [`api-market/yc-companies-intel`](https://apify.com/api-market/yc-companies-intel) |
+| **ClinicalTrials.gov Studies, Sponsors & Contacts API** | Business, Lead Generation | `$1.49 / 1,000 studies` (`$0.00149`) | [`api-market/clinicaltrials-studies-intel`](https://apify.com/api-market/clinicaltrials-studies-intel) |
+| **openFDA Drug Recalls, 510(k) Devices & Adverse Events** | Business, AI | `$1.49 / 1,000 records` (`$0.00149`) | [`api-market/openfda-regulatory-intel`](https://apify.com/api-market/openfda-regulatory-intel) |
+| **WordPress.org Plugins Market & Acquisition Radar** | Developer Tools, Lead Generation | `$0.99 / 1,000 plugins` (`$0.00099`) | [`api-market/wordpress-plugins-intel`](https://apify.com/api-market/wordpress-plugins-intel) |
+| **Hacker News Who Is Hiring Jobs & Tech Trends Scraper** | Jobs, Lead Generation | `$0.49 / 1,000 items` (`$0.00049`) | [`api-market/hn-hiring-trends-scraper`](https://apify.com/api-market/hn-hiring-trends-scraper) |
+| **Hugging Face Models, Datasets & Spaces Intelligence** | AI, Developer Tools | `$0.79 / 1,000 items` (`$0.00079`) | [`api-market/huggingface-ai-intel`](https://apify.com/api-market/huggingface-ai-intel) |
 
 ---
 
@@ -252,14 +257,80 @@ Filter and extract 6,400+ Y Combinator companies by cohort batch (`W26`, `S25`, 
 }
 ```
 
+### 15. ClinicalTrials.gov Studies, Sponsors & Contacts API
+Extract ClinicalTrials.gov v2 studies, trial phases, recruiting status, drugs/interventions, sponsors, study countries, and central contact emails.
+
+- **Apify Store:** [apify.com/api-market/clinicaltrials-studies-intel](https://apify.com/api-market/clinicaltrials-studies-intel)
+- **Sample Input:**
+```json
+{
+  "condition": "oncology",
+  "status": "RECRUITING",
+  "maxStudies": 100
+}
+```
+
+### 16. openFDA Drug Recalls, 510(k) Devices & Adverse Events
+Query FDA drug enforcement recalls, medical device recalls, 510(k) clearances, and FAERS adverse events directly from `api.fda.gov`.
+
+- **Apify Store:** [apify.com/api-market/openfda-regulatory-intel](https://apify.com/api-market/openfda-regulatory-intel)
+- **Sample Input:**
+```json
+{
+  "mode": "drug_recalls",
+  "keyword": "",
+  "maxRecords": 100
+}
+```
+
+### 17. WordPress.org Plugins Market & Acquisition Radar
+Scrape 75,000+ WordPress.org plugins with active installs, ratings, support resolution rates, and outdated high-install Micro-PE acquisition signals.
+
+- **Apify Store:** [apify.com/api-market/wordpress-plugins-intel](https://apify.com/api-market/wordpress-plugins-intel)
+- **Sample Input:**
+```json
+{
+  "mode": "browse",
+  "browse": "popular",
+  "minActiveInstalls": 10000,
+  "maxPlugins": 100
+}
+```
+
+### 18. Hacker News Who Is Hiring Jobs & Tech Trends Scraper
+Extract parsed startup job postings (company, remote, salary, stack, emails) from monthly *Ask HN: Who is hiring?* threads, Front Page, or Show HN.
+
+- **Apify Store:** [apify.com/api-market/hn-hiring-trends-scraper](https://apify.com/api-market/hn-hiring-trends-scraper)
+- **Sample Input:**
+```json
+{
+  "mode": "who_is_hiring",
+  "remoteOnly": true,
+  "maxItems": 100
+}
+```
+
+### 19. Hugging Face Models, Datasets & Spaces Intelligence
+Extract trending Hugging Face AI models, datasets, and Spaces sorted by downloads, likes, or trending score with pipeline tasks and licenses.
+
+- **Apify Store:** [apify.com/api-market/huggingface-ai-intel](https://apify.com/api-market/huggingface-ai-intel)
+- **Sample Input:**
+```json
+{
+  "resourceType": "models",
+  "sortBy": "downloads",
+  "maxItems": 100
+}
+```
+
 ---
 
 ## Quickstart Examples
 
 Set your Apify API token as an environment variable (`export APIFY_TOKEN="your_token_here"`), then run any Actor via Python, Node.js, or cURL. Full runnable scripts live in [`examples/`](examples/):
 
-- [`examples/python_quickstart.py`](examples/python_quickstart.py) — Python client runner supporting all 14 Actors (`python3 examples/python_quickstart.py --list`)
-- [`examples/node_quickstart.mjs`](examples/node_quickstart.mjs) — Node.js ESM runner supporting all 14 Actors (`node examples/node_quickstart.mjs --list`)
+- [`examples/python_quickstart.py`](examples/python_quickstart.py) — Python client runner supporting all 19 Actors (`python3 examples/python_quickstart.py --list`)
+- [`examples/node_quickstart.mjs`](examples/node_quickstart.mjs) — Node.js ESM runner supporting all 19 Actors (`node examples/node_quickstart.mjs --list`)
 - [`examples/curl_examples.sh`](examples/curl_examples.sh) — Synchronous REST API examples returning dataset JSON directly
 
 ### Python

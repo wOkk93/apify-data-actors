@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Synchronous REST API quickstart examples for all 14 api-market Apify Data Actors.
+# Synchronous REST API quickstart examples for all 19 api-market Apify Data Actors.
 #
 # Usage:
 #   export APIFY_TOKEN="your_apify_api_token"
@@ -27,6 +27,11 @@ Available actor keys:
   usaspending        -> api-market~usaspending-govcon-tracker
   defillama          -> api-market~defillama-unified-intel
   yc-companies       -> api-market~yc-companies-intel
+  clinicaltrials     -> api-market~clinicaltrials-studies-intel
+  openfda            -> api-market~openfda-regulatory-intel
+  wordpress-plugins  -> api-market~wordpress-plugins-intel
+  hn-hiring          -> api-market~hn-hiring-trends-scraper
+  huggingface        -> api-market~huggingface-ai-intel
 EOF
 }
 
@@ -91,6 +96,26 @@ case "$KEY" in
   yc-companies)
     ACTOR="api-market~yc-companies-intel"
     PAYLOAD='{"batches":["W26","F26"],"hiringOnly":true,"maxCompanies":20}'
+    ;;
+  clinicaltrials)
+    ACTOR="api-market~clinicaltrials-studies-intel"
+    PAYLOAD='{"condition":"oncology","status":"RECRUITING","maxStudies":20}'
+    ;;
+  openfda)
+    ACTOR="api-market~openfda-regulatory-intel"
+    PAYLOAD='{"mode":"drug_recalls","maxRecords":20}'
+    ;;
+  wordpress-plugins)
+    ACTOR="api-market~wordpress-plugins-intel"
+    PAYLOAD='{"mode":"browse","browse":"popular","maxPlugins":20}'
+    ;;
+  hn-hiring)
+    ACTOR="api-market~hn-hiring-trends-scraper"
+    PAYLOAD='{"mode":"who_is_hiring","maxItems":20}'
+    ;;
+  huggingface)
+    ACTOR="api-market~huggingface-ai-intel"
+    PAYLOAD='{"resourceType":"models","sortBy":"downloads","maxItems":20}'
     ;;
   *)
     echo "Unknown actor key: $KEY" >&2

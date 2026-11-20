@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Quickstart runner for all 14 api-market Apify Data Actors.
+ * Quickstart runner for all 19 api-market Apify Data Actors.
  *
  * Usage:
  *   npm install apify-client
@@ -136,6 +136,44 @@ const ACTORS = {
       batches: ["W26", "F26"],
       hiringOnly: true,
       maxCompanies: 20,
+    },
+  ],
+  clinicaltrials: [
+    "api-market/clinicaltrials-studies-intel",
+    {
+      condition: "oncology",
+      status: "RECRUITING",
+      maxStudies: 20,
+    },
+  ],
+  openfda: [
+    "api-market/openfda-regulatory-intel",
+    {
+      mode: "drug_recalls",
+      maxRecords: 20,
+    },
+  ],
+  "wordpress-plugins": [
+    "api-market/wordpress-plugins-intel",
+    {
+      mode: "browse",
+      browse: "popular",
+      maxPlugins: 20,
+    },
+  ],
+  "hn-hiring": [
+    "api-market/hn-hiring-trends-scraper",
+    {
+      mode: "who_is_hiring",
+      maxItems: 20,
+    },
+  ],
+  huggingface: [
+    "api-market/huggingface-ai-intel",
+    {
+      resourceType: "models",
+      sortBy: "downloads",
+      maxItems: 20,
     },
   ],
 };
