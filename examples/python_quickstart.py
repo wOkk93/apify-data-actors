@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Quickstart runner for all 9 api-market Apify Data Actors.
+"""Quickstart runner for all 14 api-market Apify Data Actors.
 
 Usage:
     export APIFY_TOKEN="your_apify_api_token"
@@ -98,6 +98,49 @@ ACTORS: dict[str, tuple[str, dict[str, Any]]] = {
             ],
             "maxPages": 1,
             "maxItems": 20,
+        },
+    ),
+    "podcast-leads": (
+        "api-market/podcast-leads-email-enricher",
+        {
+            "queries": ["saas marketing"],
+            "country": "us",
+            "maxPodcastsPerQuery": 10,
+            "maxTotalPodcasts": 20,
+        },
+    ),
+    "website-contacts": (
+        "api-market/website-contacts-tech-enricher",
+        {
+            "domains": ["stripe.com", "linear.app"],
+            "crawlContactPages": True,
+            "maxPagesPerDomain": 2,
+            "maxDomains": 10,
+        },
+    ),
+    "usaspending": (
+        "api-market/usaspending-govcon-tracker",
+        {
+            "keywords": ["software"],
+            "awardType": "contracts",
+            "startDate": "2026-01-01",
+            "endDate": "2026-12-31",
+            "maxAwards": 20,
+        },
+    ),
+    "defillama": (
+        "api-market/defillama-unified-intel",
+        {
+            "mode": "protocols",
+            "maxItems": 20,
+        },
+    ),
+    "yc-companies": (
+        "api-market/yc-companies-intel",
+        {
+            "batches": ["W26", "F26"],
+            "hiringOnly": True,
+            "maxCompanies": 20,
         },
     ),
 }

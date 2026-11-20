@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Synchronous REST API quickstart examples for all 9 api-market Apify Data Actors.
+# Synchronous REST API quickstart examples for all 14 api-market Apify Data Actors.
 #
 # Usage:
 #   export APIFY_TOKEN="your_apify_api_token"
@@ -22,6 +22,11 @@ Available actor keys:
   googleplay-reviews -> api-market~googleplay-reviews-intel
   shopify-appstore   -> api-market~shopify-appstore-intel
   substack           -> api-market~substack-publications-scraper
+  podcast-leads      -> api-market~podcast-leads-email-enricher
+  website-contacts   -> api-market~website-contacts-tech-enricher
+  usaspending        -> api-market~usaspending-govcon-tracker
+  defillama          -> api-market~defillama-unified-intel
+  yc-companies       -> api-market~yc-companies-intel
 EOF
 }
 
@@ -66,6 +71,26 @@ case "$KEY" in
   substack)
     ACTOR="api-market~substack-publications-scraper"
     PAYLOAD='{"mode":"posts","publications":["www.lennysnewsletter.com","newsletter.pragmaticengineer.com"],"maxPages":1,"maxItems":20}'
+    ;;
+  podcast-leads)
+    ACTOR="api-market~podcast-leads-email-enricher"
+    PAYLOAD='{"queries":["saas marketing"],"country":"us","maxPodcastsPerQuery":10,"maxTotalPodcasts":20}'
+    ;;
+  website-contacts)
+    ACTOR="api-market~website-contacts-tech-enricher"
+    PAYLOAD='{"domains":["stripe.com","linear.app"],"crawlContactPages":true,"maxPagesPerDomain":2,"maxDomains":10}'
+    ;;
+  usaspending)
+    ACTOR="api-market~usaspending-govcon-tracker"
+    PAYLOAD='{"keywords":["software"],"awardType":"contracts","startDate":"2026-01-01","endDate":"2026-12-31","maxAwards":20}'
+    ;;
+  defillama)
+    ACTOR="api-market~defillama-unified-intel"
+    PAYLOAD='{"mode":"protocols","maxItems":20}'
+    ;;
+  yc-companies)
+    ACTOR="api-market~yc-companies-intel"
+    PAYLOAD='{"batches":["W26","F26"],"hiringOnly":true,"maxCompanies":20}'
     ;;
   *)
     echo "Unknown actor key: $KEY" >&2

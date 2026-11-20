@@ -24,6 +24,11 @@ Browse the full creator catalog: **[apify.com/api-market](https://apify.com/api-
 | **Google Play Reviews & Defect Intelligence** | Developer Tools, AI | `$0.09 / 1,000 reviews` (`$0.00009`) | [`api-market/googleplay-reviews-intel`](https://apify.com/api-market/googleplay-reviews-intel) |
 | **Shopify App Store Reviews & SaaS Defect Intelligence** | E-commerce, Lead Generation | `$0.50 / 1,000 items` (`$0.0005`) | [`api-market/shopify-appstore-intel`](https://apify.com/api-market/shopify-appstore-intel) |
 | **Substack Leaderboards, Newsletters & Posts Scraper** | News, Lead Generation | `$0.90 / 1,000 items` (`$0.0009`) | [`api-market/substack-publications-scraper`](https://apify.com/api-market/substack-publications-scraper) |
+| **Podcast Host Emails, RSS & Sponsor Lead Enricher** | Business, Lead Generation | `$3.90 / 1,000 podcasts` (`$0.0039`) | [`api-market/podcast-leads-email-enricher`](https://apify.com/api-market/podcast-leads-email-enricher) |
+| **Website Contacts, Emails, Socials & Tech Stack Enricher** | Lead Generation, Developer Tools | `$1.99 / 1,000 domains` (`$0.00199`) | [`api-market/website-contacts-tech-enricher`](https://apify.com/api-market/website-contacts-tech-enricher) |
+| **USASpending Federal Contracts & GovCon Leads API** | Business, Lead Generation | `$1.99 / 1,000 awards` (`$0.00199`) | [`api-market/usaspending-govcon-tracker`](https://apify.com/api-market/usaspending-govcon-tracker) |
+| **DeFiLlama Protocols, TVL, Yields, Fees & Stablecoins** | Business, AI | `$1.49 / 1,000 records` (`$0.00149`) | [`api-market/defillama-unified-intel`](https://apify.com/api-market/defillama-unified-intel) |
+| **Y Combinator Startups, Batches & Hiring Directory** | Business, Lead Generation | `$0.99 / 1,000 companies` (`$0.00099`) | [`api-market/yc-companies-intel`](https://apify.com/api-market/yc-companies-intel) |
 
 ---
 
@@ -54,6 +59,36 @@ Extract real-time SEC EDGAR `10-K`, `10-Q`, `8-K`, `Form 4` insider trades, and 
   "tickersOrCiks": ["AAPL", "NVDA"],
   "forms": ["10-K", "10-Q", "8-K"],
   "maxFilings": 50
+}
+```
+
+### 10. USASpending Federal Contracts & GovCon Leads API
+Query U.S. federal contracts, grants, and IDVs from `api.usaspending.gov` with recipient UEI, NAICS codes, obligated award value, and recompete expiration days.
+
+- **Apify Store:** [apify.com/api-market/usaspending-govcon-tracker](https://apify.com/api-market/usaspending-govcon-tracker)
+- **Sample Input:**
+```json
+{
+  "keywords": ["software"],
+  "awardType": "contracts",
+  "startDate": "2026-01-01",
+  "endDate": "2026-12-31",
+  "maxAwards": 100
+}
+```
+
+### 11. DeFiLlama Protocols, TVL, Yields, Fees & Stablecoins
+All-in-one DeFiLlama intelligence Actor pulling protocol TVL, yield farming pool APYs, 24h/7d/30d protocol fees, and stablecoin circulating supply with zero API keys.
+
+- **Apify Store:** [apify.com/api-market/defillama-unified-intel](https://apify.com/api-market/defillama-unified-intel)
+- **Sample Input:**
+```json
+{
+  "mode": "yields",
+  "chain": "Ethereum",
+  "stablecoinOnly": true,
+  "minTvlUsd": 1000000,
+  "maxItems": 100
 }
 ```
 
@@ -174,14 +209,57 @@ Scrape Substack paid & rising category leaderboards or full newsletter post arch
 }
 ```
 
+### 12. Podcast Host Emails, RSS & Sponsor Lead Enricher
+Discover niche podcasts across 100+ countries and extract `<itunes:email>` / managing editor emails, owner names, activity status, and episode sponsorship signals.
+
+- **Apify Store:** [apify.com/api-market/podcast-leads-email-enricher](https://apify.com/api-market/podcast-leads-email-enricher)
+- **Sample Input:**
+```json
+{
+  "queries": ["saas marketing"],
+  "country": "us",
+  "requireEmail": false,
+  "activeWithinDays": 0,
+  "maxPodcastsPerQuery": 25,
+  "maxTotalPodcasts": 100
+}
+```
+
+### 13. Website Contacts, Emails, Socials & Tech Stack Enricher
+Ultra-fast, browserless B2B website enrichment extracting public emails, phone numbers, social media URLs, metadata, and 40+ detected technologies.
+
+- **Apify Store:** [apify.com/api-market/website-contacts-tech-enricher](https://apify.com/api-market/website-contacts-tech-enricher)
+- **Sample Input:**
+```json
+{
+  "domains": ["stripe.com", "linear.app"],
+  "crawlContactPages": true,
+  "maxPagesPerDomain": 3,
+  "maxDomains": 100
+}
+```
+
+### 14. Y Combinator Startups, Batches & Hiring Directory
+Filter and extract 6,400+ Y Combinator companies by cohort batch (`W26`, `S25`, `F26`), lifecycle status, hiring flags, team headcount, tags, and websites.
+
+- **Apify Store:** [apify.com/api-market/yc-companies-intel](https://apify.com/api-market/yc-companies-intel)
+- **Sample Input:**
+```json
+{
+  "batches": ["W26", "F26"],
+  "hiringOnly": true,
+  "maxCompanies": 100
+}
+```
+
 ---
 
 ## Quickstart Examples
 
 Set your Apify API token as an environment variable (`export APIFY_TOKEN="your_token_here"`), then run any Actor via Python, Node.js, or cURL. Full runnable scripts live in [`examples/`](examples/):
 
-- [`examples/python_quickstart.py`](examples/python_quickstart.py) — Python client runner supporting all 9 Actors (`python3 examples/python_quickstart.py --list`)
-- [`examples/node_quickstart.mjs`](examples/node_quickstart.mjs) — Node.js ESM runner supporting all 9 Actors (`node examples/node_quickstart.mjs --list`)
+- [`examples/python_quickstart.py`](examples/python_quickstart.py) — Python client runner supporting all 14 Actors (`python3 examples/python_quickstart.py --list`)
+- [`examples/node_quickstart.mjs`](examples/node_quickstart.mjs) — Node.js ESM runner supporting all 14 Actors (`node examples/node_quickstart.mjs --list`)
 - [`examples/curl_examples.sh`](examples/curl_examples.sh) — Synchronous REST API examples returning dataset JSON directly
 
 ### Python
@@ -238,7 +316,7 @@ All Actors expose strict JSON input schemas and normalized output datasets, maki
 No. Every Actor in this collection targets structured endpoints and direct public feeds, keeping run latency low and avoiding extra proxy costs.
 
 **How does Pay-Per-Event (PPE) billing work?**
-You are billed only per `result-item` saved to the dataset (`$0.09` to `$3.00` per 1,000 records depending on the Actor), plus minimal standard Apify platform compute.
+You are billed only per `result-item` saved to the dataset (`$0.09` to `$3.90` per 1,000 records depending on the Actor), plus minimal standard Apify platform compute.
 
 **What output formats are supported?**
 Every run stores structured records in an Apify Dataset that can be downloaded or consumed via API in JSON, JSONL, CSV, Excel (`.xlsx`), XML, or HTML table format.
