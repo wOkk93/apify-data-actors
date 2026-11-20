@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Quickstart runner for all 9 wyattearp Apify Data Actors.
+"""Quickstart runner for all 9 api-market Apify Data Actors.
 
 Usage:
     export APIFY_TOKEN="your_apify_api_token"
@@ -16,7 +16,7 @@ from typing import Any
 
 ACTORS: dict[str, tuple[str, dict[str, Any]]] = {
     "prediction-markets": (
-        "wyattearp/prediction-markets-unified",
+        "api-market/prediction-markets-unified",
         {
             "platforms": ["polymarket", "kalshi"],
             "maxMarketsPerPlatform": 20,
@@ -24,7 +24,7 @@ ACTORS: dict[str, tuple[str, dict[str, Any]]] = {
         },
     ),
     "sec-edgar": (
-        "wyattearp/sec-edgar-filings-tracker",
+        "api-market/sec-edgar-filings-tracker",
         {
             "mode": "company_filings",
             "tickersOrCiks": ["AAPL", "NVDA"],
@@ -33,7 +33,7 @@ ACTORS: dict[str, tuple[str, dict[str, Any]]] = {
         },
     ),
     "ats-jobs": (
-        "wyattearp/ats-jobs-unified-scraper",
+        "api-market/ats-jobs-unified-scraper",
         {
             "boards": ["greenhouse:stripe", "lever:palantir", "ashby:linear"],
             "maxJobsPerBoard": 20,
@@ -41,7 +41,7 @@ ACTORS: dict[str, tuple[str, dict[str, Any]]] = {
         },
     ),
     "remote-jobs": (
-        "wyattearp/remote-jobs-unified-scraper",
+        "api-market/remote-jobs-unified-scraper",
         {
             "sources": ["remoteok", "remotive", "jobicy", "arbeitnow"],
             "remoteOnly": True,
@@ -50,7 +50,7 @@ ACTORS: dict[str, tuple[str, dict[str, Any]]] = {
         },
     ),
     "shopify-catalog": (
-        "wyattearp/shopify-catalog-lead-enricher",
+        "api-market/shopify-catalog-lead-enricher",
         {
             "domains": ["allbirds.com"],
             "mode": "products",
@@ -59,7 +59,7 @@ ACTORS: dict[str, tuple[str, dict[str, Any]]] = {
         },
     ),
     "appstore-reviews": (
-        "wyattearp/appstore-reviews-intel",
+        "api-market/appstore-reviews-intel",
         {
             "appIds": ["389801252"],
             "countries": ["us"],
@@ -69,7 +69,7 @@ ACTORS: dict[str, tuple[str, dict[str, Any]]] = {
         },
     ),
     "googleplay-reviews": (
-        "wyattearp/googleplay-reviews-intel",
+        "api-market/googleplay-reviews-intel",
         {
             "appIds": ["com.instagram.android"],
             "lang": "en",
@@ -79,7 +79,7 @@ ACTORS: dict[str, tuple[str, dict[str, Any]]] = {
         },
     ),
     "shopify-appstore": (
-        "wyattearp/shopify-appstore-intel",
+        "api-market/shopify-appstore-intel",
         {
             "appSlugs": ["klaviyo-email-marketing"],
             "mode": "reviews",
@@ -89,7 +89,7 @@ ACTORS: dict[str, tuple[str, dict[str, Any]]] = {
         },
     ),
     "substack": (
-        "wyattearp/substack-publications-scraper",
+        "api-market/substack-publications-scraper",
         {
             "mode": "posts",
             "publications": [

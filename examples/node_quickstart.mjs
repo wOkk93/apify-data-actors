@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Quickstart runner for all 9 wyattearp Apify Data Actors.
+ * Quickstart runner for all 9 api-market Apify Data Actors.
  *
  * Usage:
  *   npm install apify-client
@@ -11,7 +11,7 @@
 
 const ACTORS = {
   "prediction-markets": [
-    "wyattearp/prediction-markets-unified",
+    "api-market/prediction-markets-unified",
     {
       platforms: ["polymarket", "kalshi"],
       maxMarketsPerPlatform: 20,
@@ -19,7 +19,7 @@ const ACTORS = {
     },
   ],
   "sec-edgar": [
-    "wyattearp/sec-edgar-filings-tracker",
+    "api-market/sec-edgar-filings-tracker",
     {
       mode: "company_filings",
       tickersOrCiks: ["AAPL", "NVDA"],
@@ -28,7 +28,7 @@ const ACTORS = {
     },
   ],
   "ats-jobs": [
-    "wyattearp/ats-jobs-unified-scraper",
+    "api-market/ats-jobs-unified-scraper",
     {
       boards: ["greenhouse:stripe", "lever:palantir", "ashby:linear"],
       maxJobsPerBoard: 20,
@@ -36,7 +36,7 @@ const ACTORS = {
     },
   ],
   "remote-jobs": [
-    "wyattearp/remote-jobs-unified-scraper",
+    "api-market/remote-jobs-unified-scraper",
     {
       sources: ["remoteok", "remotive", "jobicy", "arbeitnow"],
       remoteOnly: true,
@@ -45,7 +45,7 @@ const ACTORS = {
     },
   ],
   "shopify-catalog": [
-    "wyattearp/shopify-catalog-lead-enricher",
+    "api-market/shopify-catalog-lead-enricher",
     {
       domains: ["allbirds.com"],
       mode: "products",
@@ -54,7 +54,7 @@ const ACTORS = {
     },
   ],
   "appstore-reviews": [
-    "wyattearp/appstore-reviews-intel",
+    "api-market/appstore-reviews-intel",
     {
       appIds: ["389801252"],
       countries: ["us"],
@@ -64,7 +64,7 @@ const ACTORS = {
     },
   ],
   "googleplay-reviews": [
-    "wyattearp/googleplay-reviews-intel",
+    "api-market/googleplay-reviews-intel",
     {
       appIds: ["com.instagram.android"],
       lang: "en",
@@ -74,7 +74,7 @@ const ACTORS = {
     },
   ],
   "shopify-appstore": [
-    "wyattearp/shopify-appstore-intel",
+    "api-market/shopify-appstore-intel",
     {
       appSlugs: ["klaviyo-email-marketing"],
       mode: "reviews",
@@ -84,7 +84,7 @@ const ACTORS = {
     },
   ],
   substack: [
-    "wyattearp/substack-publications-scraper",
+    "api-market/substack-publications-scraper",
     {
       mode: "posts",
       publications: [

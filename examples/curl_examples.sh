@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Synchronous REST API quickstart examples for all 9 wyattearp Apify Data Actors.
+# Synchronous REST API quickstart examples for all 9 api-market Apify Data Actors.
 #
 # Usage:
 #   export APIFY_TOKEN="your_apify_api_token"
@@ -13,15 +13,15 @@ KEY="${1:-prediction-markets}"
 print_list() {
   cat <<'EOF'
 Available actor keys:
-  prediction-markets -> wyattearp~prediction-markets-unified
-  sec-edgar          -> wyattearp~sec-edgar-filings-tracker
-  ats-jobs           -> wyattearp~ats-jobs-unified-scraper
-  remote-jobs        -> wyattearp~remote-jobs-unified-scraper
-  shopify-catalog    -> wyattearp~shopify-catalog-lead-enricher
-  appstore-reviews   -> wyattearp~appstore-reviews-intel
-  googleplay-reviews -> wyattearp~googleplay-reviews-intel
-  shopify-appstore   -> wyattearp~shopify-appstore-intel
-  substack           -> wyattearp~substack-publications-scraper
+  prediction-markets -> api-market~prediction-markets-unified
+  sec-edgar          -> api-market~sec-edgar-filings-tracker
+  ats-jobs           -> api-market~ats-jobs-unified-scraper
+  remote-jobs        -> api-market~remote-jobs-unified-scraper
+  shopify-catalog    -> api-market~shopify-catalog-lead-enricher
+  appstore-reviews   -> api-market~appstore-reviews-intel
+  googleplay-reviews -> api-market~googleplay-reviews-intel
+  shopify-appstore   -> api-market~shopify-appstore-intel
+  substack           -> api-market~substack-publications-scraper
 EOF
 }
 
@@ -32,39 +32,39 @@ fi
 
 case "$KEY" in
   prediction-markets)
-    ACTOR="wyattearp~prediction-markets-unified"
+    ACTOR="api-market~prediction-markets-unified"
     PAYLOAD='{"platforms":["polymarket","kalshi"],"maxMarketsPerPlatform":20,"includeCrossMarketMatches":true}'
     ;;
   sec-edgar)
-    ACTOR="wyattearp~sec-edgar-filings-tracker"
+    ACTOR="api-market~sec-edgar-filings-tracker"
     PAYLOAD='{"mode":"company_filings","tickersOrCiks":["AAPL","NVDA"],"forms":["10-K","10-Q","8-K"],"maxFilings":20}'
     ;;
   ats-jobs)
-    ACTOR="wyattearp~ats-jobs-unified-scraper"
+    ACTOR="api-market~ats-jobs-unified-scraper"
     PAYLOAD='{"boards":["greenhouse:stripe","lever:palantir","ashby:linear"],"maxJobsPerBoard":20,"maxTotalJobs":50}'
     ;;
   remote-jobs)
-    ACTOR="wyattearp~remote-jobs-unified-scraper"
+    ACTOR="api-market~remote-jobs-unified-scraper"
     PAYLOAD='{"sources":["remoteok","remotive","jobicy","arbeitnow"],"remoteOnly":true,"maxJobsPerSource":20,"maxTotalJobs":50}'
     ;;
   shopify-catalog)
-    ACTOR="wyattearp~shopify-catalog-lead-enricher"
+    ACTOR="api-market~shopify-catalog-lead-enricher"
     PAYLOAD='{"domains":["allbirds.com"],"mode":"products","maxPagesPerStore":1,"maxItems":25}'
     ;;
   appstore-reviews)
-    ACTOR="wyattearp~appstore-reviews-intel"
+    ACTOR="api-market~appstore-reviews-intel"
     PAYLOAD='{"appIds":["389801252"],"countries":["us"],"sortBy":"mostrecent","maxPagesPerCountry":1,"maxReviews":25}'
     ;;
   googleplay-reviews)
-    ACTOR="wyattearp~googleplay-reviews-intel"
+    ACTOR="api-market~googleplay-reviews-intel"
     PAYLOAD='{"appIds":["com.instagram.android"],"lang":"en","country":"us","sortBy":"newest","maxReviews":25}'
     ;;
   shopify-appstore)
-    ACTOR="wyattearp~shopify-appstore-intel"
+    ACTOR="api-market~shopify-appstore-intel"
     PAYLOAD='{"appSlugs":["klaviyo-email-marketing"],"mode":"reviews","sortBy":"newest","maxPagesPerApp":1,"maxItems":25}'
     ;;
   substack)
-    ACTOR="wyattearp~substack-publications-scraper"
+    ACTOR="api-market~substack-publications-scraper"
     PAYLOAD='{"mode":"posts","publications":["www.lennysnewsletter.com","newsletter.pragmaticengineer.com"],"maxPages":1,"maxItems":20}'
     ;;
   *)
